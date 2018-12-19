@@ -1,6 +1,6 @@
-require "rubygems"
-require "sinatra"
-require "datamaper"
+require 'rubygems'
+require 'sinatra'
+require 'data_mapper'
 
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/recall.db")
  
@@ -14,3 +14,10 @@ class Note
 end
  
 DataMapper.finalize.auto_upgrade!
+
+get "/" do
+  @notes = Note.all :order => :id.desc
+  @title = "All Notes"
+  erb :home
+end
+
