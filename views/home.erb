@@ -1,18 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-    <section id="add">
-        <form action="/" method="post">
-            <textarea name="content" placeholder="Your note&hellip"></textarea>
-            <input type="submit" value="Take Note!">
-        </form>
-    </section>
-    <% #display notes %>
-</body>
-</html>
+<section id="add">
+    <form action="/" method="post">
+        <textarea name="content" placeholder="Your note&hellip"></textarea>
+        <input type="submit" value="Take Note!">
+    </form>
+</section>
+
+<% @notes.each do |note| %>
+  <article <%= 'class="complete"' if note.complete %>>
+    <p>
+      <%= note.content %>
+      <span><a href="/<%= note.id %>">[edit]</a></span>
+    </p>
+    <p class="links">
+      <a href="/<%= note.id %>/complete">&#8623;</a>
+    </p>
+    <p class="meta">Created: <%= note.created_at %></p>
+  </article>
+<% end %>
