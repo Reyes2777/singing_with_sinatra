@@ -1,4 +1,4 @@
-require 'rubygems'
+ require 'rubygems'
 require 'sinatra'
 require 'data_mapper'
 
@@ -21,3 +21,11 @@ get "/" do
   erb :home
 end
 
+post '/' do
+  n = Note.new
+  n.content = params[:content]
+  n.created_at = Time.now
+  n.updated_at = Time.now
+  n.save
+  redirect '/'
+end
